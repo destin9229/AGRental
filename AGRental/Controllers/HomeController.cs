@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AGRental.Models;
 
-namespace AGRental.Controllers
+namespace VenueApp.Controllers
 {
     public class HomeController : Controller
     {
