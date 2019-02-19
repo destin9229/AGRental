@@ -15,7 +15,7 @@ namespace AGRental.Data
         { }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserType> Types { get; set; }
+        //public DbSet<Properties> Properties { get; set; }
 
     }
 }

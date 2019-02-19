@@ -10,6 +10,7 @@ using AGRental.Data;
 using AGRental.Models;
 using AGRental.Helpers;
 using AGRental.ViewModels;
+using Microsoft.AspNetCore.Session;
 
 
 namespace AGRental.Controllers
@@ -36,7 +37,6 @@ namespace AGRental.Controllers
         }
 
 
-
         //LOGIN
         // GET: /<controller>/
         public IActionResult Login()
@@ -56,7 +56,6 @@ namespace AGRental.Controllers
         }
 
         // POST: /<controller>/
-
         [HttpPost]
         public IActionResult Login(LoginViewModel userFromView)
         {
@@ -66,25 +65,24 @@ namespace AGRental.Controllers
 
                 if ((currentUser != null) && (currentUser.Password == userFromView.Password))
                 {
-                    //Login Success... Greet the User
+                    //Login Successful. Greets the User
                     HttpContext.Session.SetString("user", currentUser.Username);
                     string userInSesion = HttpContext.Session.GetString("user");
                     TestFunctions.PrintConsoleMessage("LOGIN SUCCESS " + userInSesion);
 
                     //return Redirect("/User");
-                    //return RedirectToAction("Index", "User",new { username = currentUser.Username });
                     return RedirectToAction("Index", "User", new { username = userInSesion });
                 }
                 else if (currentUser == null)
                 {
-                    // User Does not exist in the database... return custom message
+                    // User Does not exist in the database. Return message
                     ModelState.AddModelError("ServerError", "Sorry, we couldn't find an account with that Username");
                     userFromView.ServerError = true;
                     TestFunctions.PrintConsoleMessage("USER DOES NOT EXIST IN THE DATABASE");
                 }
                 else
                 {
-                    // Password Does not Match with the one in the database... return custom message
+                    // Password Does not Match with the one in the database. Return custom message
                     ModelState.AddModelError("ServerError", "Sorry, that password isn't correct.");
                     userFromView.ServerError = true;
                     TestFunctions.PrintConsoleMessage("PASSWORD DOES NOT MATCH BETWEEN THE FORM AND DATABASE");
@@ -99,14 +97,9 @@ namespace AGRental.Controllers
         // GET: /<controller>/
         public IActionResult Logout()
         {
-            //Delete or clear the Current Session
-            //HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "User", new { username = HttpContext.Session.GetString("user") });
-            //return RedirectToAction("Index", "User", new { username = "" });
         }
-
-
 
         //SIGNUP
         // GET: /<controller>/
@@ -125,11 +118,6 @@ namespace AGRental.Controllers
 
             if (ModelState.IsValid)
             {
-                /*
-                //User existingUser = context.Users.Find(userFromView.Username);
-                //existingUser = context.Users.SingleOrDefault(c => c.Username == userFromView.Username);
-                */
-
                 try
                 {
                     //Check for the availability of the selected username on the database 
@@ -151,9 +139,6 @@ namespace AGRental.Controllers
                         LastName = userFromView.LastName,
                         Email = userFromView.Email,
                         Password = userFromView.Password,
-                        TypeID = 2,         // Default for "Regular user", needs to be implemented for the next database update
-                        MembershipID = 1    // Default for "None"
-                                            //Created = DateTime.Now    //To be used when updating database, needs to be implemented for the next database update
                     };
 
                     context.Users.Add(newUser);
@@ -164,12 +149,12 @@ namespace AGRental.Controllers
                     string userInSesion = HttpContext.Session.GetString("user");
                     TestFunctions.PrintConsoleMessage("LOGIN SUCCESS " + userInSesion);
 
-                    // Greet the new user and redirect to its dashboard (Needs to be made)
+                    // Greet the new user and redirect to its dashboard (Needs to be implemented)
                     return RedirectToAction("Index", "User", new { username = userInSesion });
                 }
                 else
                 {
-                    // Cannot use the same username if it exist already
+                    // Can't use existing user
                     ModelState.AddModelError("ServerError", "Sorry, but this username already exists. Please try with a different one.");
                     userFromView.ServerError = true;
                     TestFunctions.PrintConsoleMessage("DUPLICATED USER");

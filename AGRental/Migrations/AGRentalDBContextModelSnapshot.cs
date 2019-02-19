@@ -20,51 +20,53 @@ namespace AGRental.Migrations
 
             modelBuilder.Entity("AGRental.Models.User", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("User_ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Username");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("MembershipID");
+                    b.Property<string>("Email");
 
                     b.Property<string>("Password");
 
-                    b.Property<int>("TypeID");
-
-                    b.Property<string>("Username");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("TypeID");
+                    b.HasKey("User_ID");
 
                     b.ToTable("Users");
-                });
 
-            modelBuilder.Entity("AGRental.Models.UserType", b =>
+                });
+           
+
+            modelBuilder.Entity("AGRental.Models.Properties", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Property_ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("property_name");
 
-                    b.HasKey("ID");
+                    b.Property<string>("address");
 
-                    b.ToTable("Types");
+                    b.HasKey("Property_ID");
+
+                    b.ToTable("Properties");
+
                 });
 
-            modelBuilder.Entity("AGRental.Models.User", b =>
-                {
-                    b.HasOne("AGRental.Models.UserType", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            modelBuilder.Entity("AGRental.Models.User_Properties", b =>
+            {
+                b.Property<int>("UserID");
+
+                b.Property<int>("PropertyID");
+
+                b.ToTable("User_Properties");
+
+            });
+
 #pragma warning restore 612, 618
         }
     }

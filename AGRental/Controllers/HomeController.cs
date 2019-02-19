@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AGRental.Models;
+using Microsoft.AspNetCore.Session;
+
 
 namespace VenueApp.Controllers
 {
