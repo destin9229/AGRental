@@ -6,9 +6,12 @@ using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace AGRental.Controllers
 {
+    // [Authorize]
     public class PaymentController : Controller
     {
         public IActionResult Index()

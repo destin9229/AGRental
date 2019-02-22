@@ -1,16 +1,18 @@
-﻿
+﻿@model IEnumerable<AGRental.Models.Properties>
+
 @{
     ViewData["Title"] = "Rent";
 }
-
 <h2 align="center">Rent</h2>
 <h6 align="center">Here are the available properties that we have to offer!!</h6>
 
-<div style="width:100%; height:100%">
-    <button type="button">Property 1 (Available)</button>
-    <button type="button">Property 2(Available)</button>
-    <button type="button">Property 3 (Available)</button>
-    <button type="button">Property 4 (Available)</button>
-    <button type="button">Property 5 (Available)</button>
-    <button type="button">Property 6 (Available)</button>
-</div>
+@foreach (var item in Model)
+{
+    <table>
+        <tr>
+            <td>
+                <a asp-action="ViewProperty" asp-route-id="@item.Property_ID">@Html.DisplayFor(modelItem => item.property_name)</a>
+            </td>
+        </tr>
+    </table>
+}
