@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AGRental.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Session;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AGRental
 {
@@ -37,6 +37,15 @@ namespace AGRental
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+            options =>
+            {
+            options.LoginPath = new PathString("/User/Login");
+            //options.AccessDeniedPath = new PathString("/auth/denied");
             });
 
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AGRental.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class RentController : Controller
     {
         private AGRentalDBContext context;

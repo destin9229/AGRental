@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AGRental.Models;
 using Microsoft.AspNetCore.Session;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace VenueApp.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize(Roles = "Users")]
         public IActionResult Index()
         {
-            return View();
+                return View();
         }
 
         public IActionResult About()

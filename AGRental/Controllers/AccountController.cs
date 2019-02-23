@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AGRental.Controllers
 {
-    
+    [Authorize]
     public class AccountController : Controller
     {
-        //[Authorize]
         public IActionResult Index()
         {
             return View();
