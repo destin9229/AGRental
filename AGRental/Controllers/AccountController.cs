@@ -13,7 +13,21 @@ namespace AGRental.Controllers
         //[Authorize]
         public IActionResult Index()
         {
-          
+            return View();
+        }
+
+        public IActionResult CurrentLease()
+        {
+            return View();
+        }
+
+        public IActionResult RenewLease()
+        {
+            return View();
+        }
+
+        public IActionResult EndLease()
+        {
             return View();
         }
     }

@@ -9,5 +9,6 @@ namespace AGRental.ViewModels
 {
     public class RentPropertyViewModels 
     {
+
     }
 }

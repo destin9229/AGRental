@@ -72,7 +72,7 @@ namespace AGRental
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=AGRental}/{action=Index}/{id?}");
             });
         }
     }
