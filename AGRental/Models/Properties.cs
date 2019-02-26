@@ -14,5 +14,8 @@ namespace AGRental.Models
         public int Property_ID { get; set; }
         public string property_name { get; set; }
         public string address { get; set; }
+        public string city { get; set; }
+        public int price { get; set; }
+        public bool is_taken { get; set; }
     }
 }

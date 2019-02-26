@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AGRental.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PaymentController : Controller
     {
         public IActionResult Index()

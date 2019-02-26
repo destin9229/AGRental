@@ -37,7 +37,12 @@ foreach (var item in Model)
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["address"]">@Html.DisplayNameFor(model => model.address)</a>
             </th>
-            <th></th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["city"]">@Html.DisplayNameFor(model => model.city)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["price"]">@Html.DisplayNameFor(model => model.price)</a>
+            </th>
         </tr>
     </thead>
     <tbody>

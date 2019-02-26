@@ -7,15 +7,35 @@ using Microsoft.AspNetCore.Mvc;
 using AGRental.Models;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using AGRental.Data;
 
 namespace VenueApp.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize(Roles = "Users")]
+        private AGRentalDBContext context;
+
+        public HomeController(AGRentalDBContext dbContext)
+        {
+            context = dbContext;
+        }
+
+        //Index
+        //GET: /<controller>
         public IActionResult Index()
         {
+            //Verfies if an "user" is logged in
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
                 return View();
+            }
+
+            //Returns error message that a user is not logged in
+            else
+            {
+                return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
+            }
         }
 
         public IActionResult About()

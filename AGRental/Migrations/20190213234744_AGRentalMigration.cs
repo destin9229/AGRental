@@ -32,6 +32,7 @@ namespace AGRental.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     property_name = table.Column<string>(nullable: false),
                     address = table.Column<string>(nullable: false),
+                    city = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
