@@ -1,27 +1,25 @@
-﻿@model IEnumerable<AGRental.Models.Properties>
+﻿@model List<AGRental.Models.Properties>
 
 @{
     ViewData["Title"] = "Rent";
+
+
+    @using Microsoft.AspNetCore.Http
+    @using System.Globalization
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+    string userType = @HttpContextAccessor.HttpContext.Session.GetString("Type") ?? "";
+
 }
 <h2 align="center">Rent</h2>
 <h6 align="center">Here are the available properties that we have to offer!!</h6>
+
 <!--
-foreach (var item in Model)
-{
-    <table>
-        <tr>
-            <td>
-                <a asp-action="ViewProperty" asp-route-id="item.Property_ID">Html.DisplayFor(modelItem => item.property_name)</a>
-            </td>
-        </tr>
-    </table>
--->
 
-
-<form asp-action="Index" method="get">
+    <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by city: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            Find by: <input type="text" name="SearchString" value="ViewData["currentFilter"]" />
             <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-action="Index">Back to Full List</a>
         </p>
@@ -29,35 +27,50 @@ foreach (var item in Model)
 </form>
 
 <table class="table">
+
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["property_name"]">@Html.DisplayNameFor(model => model.property_name)</a>
+                <a asp-action="Index" asp-route-sortOrder="ViewData["PropertyNameSortParm"]">Html.DisplayNameFor(model => model.property_name)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["address"]">@Html.DisplayNameFor(model => model.address)</a>
+                <a asp-action="Index" asp-route-sortOrder="ViewData["AddressSortParm"]">Html.DisplayNameFor(model => model.address)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["city"]">@Html.DisplayNameFor(model => model.city)</a>
+                <a asp-action="Index" asp-route-sortOrder="ViewData["CitySortParm"]">Html.DisplayNameFor(model => model.city)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["price"]">@Html.DisplayNameFor(model => model.price)</a>
+                <a asp-action="Index" asp-route-sortOrder="ViewData["PriceSortParm"]">Html.DisplayNameFor(model => model.price)</a>
             </th>
         </tr>
     </thead>
-    <tbody>
+
+ -->
+
+
+<table class="table table-striped">
+    <tr>
+        <th>Property Name: </th>
+        <th>Address: </th>
+        <th>City: </th>
+        <th>Price: </th>
+    </tr>
+    
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    <a asp-action="ViewProperty" asp-route-id="item.Property_ID">@Html.DisplayFor(modelItem => item.property_name)</a>
+                  <a asp-controller="Rent" asp-action="ViewProperty" asp-route-propertyId="@item.Property_ID">@item.property_name</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.address)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
             </tr>
         }
-    </tbody>
 </table>
-
-}

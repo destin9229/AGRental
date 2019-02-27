@@ -19,76 +19,93 @@ namespace AGRental.Controllers
         {
             context = dbContext;
         }
-        /*
-        public IActionResult Index()
-        {
-            return View(context.Properties.ToList());
-        }
-        */
-       
+
+
         //Index
         //GET: /<controller>
-        //Generates Search and Sort the available properties from the Properties table
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        //Generates available properties from the Properties table
+        public IActionResult Index()
         {
+            IList<Properties> properties = new List<Properties>();
 
             //Verfies if an "user" is logged in
-            if (HttpContext.Session.GetString("Type") == "user")
-            {
-                ViewData["property_name"] = String.IsNullOrEmpty(sortOrder) ? "propety_name_desc" : "propety_name";
-                ViewData["address"] = sortOrder == "Address" ? "address=desc" : "Address";
-                ViewData["city"] = sortOrder == "City" ? "city=desc" : "City";
-                ViewData["price"] = sortOrder == "Price" ? "price=desc" : "Price";
+            //if (HttpContext.Session.GetString("Type") == "user")
+            //{
+                properties = context.Properties.Where(c => c.is_taken == false).ToList();
+                return View(properties);
+            //}
 
-                ViewData["CurrentFilter"] = searchString;
-                var Properties = from p in context.Properties
-                                 select p;
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    Properties = Properties.Where(p => p.property_name.Contains(searchString));
-                }
-                switch (sortOrder)
-                {
-                    case "propety_name_desc":
-                        Properties = Properties.OrderByDescending(s => s.property_name);
-                        break;
-                    case "Address":
-                        Properties = Properties.OrderBy(s => s.address);
-                        break;
-                    case "city":
-                        Properties = Properties.OrderBy(s => s.city);
-                        break;
-                    case "price":
-                        Properties = Properties.OrderBy(s => s.price);
-                        break;
-                }
-                return View(await Properties.AsNoTracking().ToListAsync());
-            }
 
             //Redirects to login page if no user is logged in
-            else
-            {
+            //else
+            //{
                 //ViewBag.ErrorMessage = "You must be logged into to gain access to this feature";
-                return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
-            }
-    
-
-            /*
-            public IActionResult ViewProperty(int Property_ID)
-            {
-                    List<Properties> properties = context
-                        .Properties
-                        .Include(property => property.property_name)
-                        .Where(cm => cm.Property_ID == id)
-                        .ToList();
-                    RentPropertyViewModel viewModel = new RentPropertyViewModel
-                    {
-                        Property_name = property_name;
-                        Address = address;
-                    };
-            }
-            */
-
+            //    return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
+            //}
         }
+
+         //Gets the selected property that the User selects
+         public IActionResult ViewProperty(int propertyId)
+         {
+                //Verfies if an "user" is logged in
+              //  if (HttpContext.Session.GetString("Type") == "user")
+              //  {
+
+                    Properties selectedProperty = context.Properties.Single(c => c.Property_ID == propertyId);
+                    return View(selectedProperty);
+              //  }
+
+
+                //Redirects to login page if no user is logged in
+                //else
+              //  {
+                    //ViewBag.ErrorMessage = "You must be logged into to gain access to this feature";
+              //      return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
+              //  }
+         }
+
+
+        /*
+        //Adds the c
+         public IActionResult addProperty()
+        {
+            Properties addPropertyView = new Properties(context.Properties.ToList());
+            return (addPropertyView);
+        }
+
+        public IActionResult Add(addPropertyView addPropertyView)
+        {
+            if (ModelState.IsValid)
+            {
+                Properties takeProperty = context.Properties.Single(c => c.ID == addPropertyView.Propert_ID);
+
+                // Add the new event to my existing events
+                Event newEvent = new Event
+                {
+                    Name = addEventViewModel.Name,
+                    Description = addEventViewModel.Description,
+                    Category = newEventCategory,
+                    Price = addEventViewModel.Price,
+                    Date = addEventViewModel.Date + addEventViewModel.Time,
+                    Created = DateTime.Now
+                };
+
+                context.Events.Add(newEvent);
+                context.SaveChanges();
+
+
+                // Success!!! event added...  return custom message
+                TempData["Message"] = "Event " + newEvent.ID + " was successfully created.";
+                TestFunctions.PrintConsoleMessage("SUCCESS, EVENT ADDED / CREATED");
+
+                return Redirect("/Event");
+            }
+
+            addEventViewModel.SetCategories(context.Categories.ToList());
+            return View(addEventViewModel);
+        }
+
+    */
+
     }
 }

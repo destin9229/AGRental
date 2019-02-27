@@ -34,16 +34,21 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">AGRental</a>
             </div>
+
+            <!--DEFAULT NAVIGATION BAR-->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="Home">Home</a></li>
                     <li><a href="Rent">Rent</a></li>
                     <li><a href="Account">Account</a></li>
                 </ul>
+
+
                 @if (username.Length > 0)
                 {
+                    <!--NAVIGATION BAR After user creates account-->
                     <p class="navbar-right">
-                        <a asp-controller="Dashboard" asp-action="Index">
+                        <a asp-controller="Account" asp-action="Index">
                             <button type="button" class="btn btn-default btn-lg user-login-btn">
                                 <span class="fas fa-user fa-lg" aria-hidden="true"></span> @username
                             </button>

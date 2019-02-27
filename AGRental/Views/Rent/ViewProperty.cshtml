@@ -1,7 +1,21 @@
-﻿@model AGRental.ViewModels.RentPropertyViewModels
+﻿@model AGRental.Models.Properties
 
 @{
     ViewData["Title"] = "ViewProperty";
+
+    @using Microsoft.AspNetCore.Http
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+    string userType = @HttpContextAccessor.HttpContext.Session.GetString("Type") ?? "";
 }
 
-<h2>Here is the property details</h2>
+<h2 align="center">Here is the property details</h2>
+
+<div>
+    <h5>Status : <font color="green">Avaliable</font></h5>
+    <h6>Property Name: <i>@Model.property_name</i></h6>
+    <h6>City: <i>@Model.city</i></h6>
+    <h6>Address: <i>@Model.address</i></h6>
+    <h6>Price: $<i>@Model.price</i></h6>
+    <button type="button">Rent Property</button>
+</div>
