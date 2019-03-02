@@ -16,6 +16,8 @@ namespace AGRental.Models
         public string address { get; set; }
         public string city { get; set; }
         public int price { get; set; }
+        public int bedrooms { get; set; }
+        public int bathrooms { get; set; }
         public bool is_taken { get; set; }
     }
 }

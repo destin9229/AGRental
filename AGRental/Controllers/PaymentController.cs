@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AGRental.Controllers
 {
-    //[Authorize]
     public class PaymentController : Controller
     {
         public IActionResult Index()
         {
+            //NEEDS TO BE IMPLEMENTED
             return View();
         }
     }

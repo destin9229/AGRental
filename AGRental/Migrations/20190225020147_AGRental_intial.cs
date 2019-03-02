@@ -17,6 +17,8 @@ namespace AGRental.Migrations
                     address = table.Column<string>(nullable: true),
                     city = table.Column<string>(nullable: true),
                     price = table.Column<int>(nullable: false),
+                    //bedrooms = table.Column<int>(nullable: false),
+                    //bathrooms = table.Column<int>(nullable: false)
                     is_taken = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

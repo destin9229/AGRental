@@ -1,15 +1,29 @@
-﻿@{
+﻿<!--model List<AGRental.Models.UserProperties>-->
+
+@{
     ViewData["Title"] = "Account";
+
+    @using Microsoft.AspNetCore.Http
+    @using System.Globalization
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+    int User_ID = @HttpContextAccessor.HttpContext.Session.GetInt32("UserID") ?? 0;
 }
 
 <h1 align="center">Account</h1>
 
 <h6 align="center">Here is your profile. Here is your current Lease. Would you like to renew the lease or end the lease?</h6>
- 
+
+<!-- BUTTONS ON ACCOUNT SCREEN  -->
+
 <div align="center" style="width:100%; height:100%">
 
-    <input type="button" value="Current Lease" onclick="@("window.location.href='" + @Url.Action("CurrentLease", "Account") + "'");" />
-    <input type="button" value="Renew Lease" onclick="@("window.location.href='" + @Url.Action("RenewLease", "Account") + "'");" />
-    <input type="button" value="End Lease" onclick="@("window.location.href='" + @Url.Action("EndLease", "Account") + "'");" />
+    <a asp-controller="Account" asp-action="CurrentLease" asp-route-User_ID="@User_ID"><input type="button" value="Current Lease" /></a>
+    <a asp-controller="Account" asp-action="EndLease" asp-route-User_ID="@User_ID"><input type="button" value="End Lease" /></a>
+
+    <!--
+        <input type="button" value="Renew Lease" onclick="("window.location.href='" + Url.Action("RenewLease", "Account") + "'");" />
+        <input type="button" value="End Lease" onclick="("window.location.href='" + Url.Action("EndLease", "Account") + "'");" />
+    -->
 
 </div>

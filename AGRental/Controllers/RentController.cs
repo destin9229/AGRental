@@ -8,6 +8,7 @@ using AGRental.Data;
 using AGRental.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using AGRental.ViewModels;
 
 namespace AGRental.Controllers
 {
@@ -20,19 +21,47 @@ namespace AGRental.Controllers
             context = dbContext;
         }
 
-
         //Index
         //GET: /<controller>
         //Generates available properties from the Properties table
         public IActionResult Index()
         {
-            IList<Properties> properties = new List<Properties>();
-
             //Verfies if an "user" is logged in
             //if (HttpContext.Session.GetString("Type") == "user")
             //{
-                properties = context.Properties.Where(c => c.is_taken == false).ToList();
-                return View(properties);
+
+            //Creates an object for the UserPropertiesViewModel
+            UserPropertiesViewModel userPropertiesView = new UserPropertiesViewModel();
+
+            //Creates an object for the list of Properties
+            IList<Properties> properties = new List<Properties>();
+
+            //Defines the hasProperty to equal false
+            bool hasProperty=false;
+
+            //Gets the current UserID for the session
+            int UserID = HttpContext.Session.GetInt32("UserID") ?? 0;
+
+            //Checks if the current User logged in is the UserProperties table
+            UserProperties current_userProperty = context.UserProperties.SingleOrDefault(c => c.UserID == UserID);
+
+            //Checks if the current UserProperties is null or not null
+            if(current_userProperty != null)
+            {
+                hasProperty = true;
+            }
+
+            //Gets all the properties not taken in the Properties table
+            properties = context.Properties.Where(c => c.is_taken == false).ToList();
+
+            //Sets the property list in the view to properties
+            userPropertiesView.propertyList = properties;
+
+            //Sets has property in the view to hasProperty
+            userPropertiesView.hasProperty = hasProperty;
+
+            //Returns the userPropertiesView
+            return View(userPropertiesView);
             //}
 
 
@@ -65,47 +94,51 @@ namespace AGRental.Controllers
          }
 
 
+
+        //Adds the property to the account
+         public IActionResult addViewProperty(int Property_ID)
+        {
+            int UserID = HttpContext.Session.GetInt32("UserID") ?? 0;
+            UserProperties new_property = new UserProperties();
+            new_property.UserID = UserID;
+            new_property.PropertyID = Property_ID;
+            context.Add(new_property);
+            context.SaveChanges();
+
+            Properties selectedProperty = context.Properties.Single(c => c.Property_ID == Property_ID);
+            selectedProperty.is_taken = true;
+            context.SaveChanges();
+
+
+            // Properties addPropertyView = new Properties(context.Properties.ToList());
+            // return (addPropertyView);
+            return View();
+        }
         /*
-        //Adds the c
-         public IActionResult addProperty()
-        {
-            Properties addPropertyView = new Properties(context.Properties.ToList());
-            return (addPropertyView);
-        }
-
-        public IActionResult Add(addPropertyView addPropertyView)
-        {
-            if (ModelState.IsValid)
-            {
-                Properties takeProperty = context.Properties.Single(c => c.ID == addPropertyView.Propert_ID);
-
-                // Add the new event to my existing events
-                Event newEvent = new Event
+                public IActionResult Add(addPropertyView addPropertyView)
                 {
-                    Name = addEventViewModel.Name,
-                    Description = addEventViewModel.Description,
-                    Category = newEventCategory,
-                    Price = addEventViewModel.Price,
-                    Date = addEventViewModel.Date + addEventViewModel.Time,
-                    Created = DateTime.Now
-                };
+                    if (ModelState.IsValid)
+                    {
+                        Properties takeProperty = context.Properties.Single(c => c.Property_ID == addPropertyView.Property_ID);
 
-                context.Events.Add(newEvent);
-                context.SaveChanges();
+                        // Add the new event to my existing events
+                        Properties newEvent = new Properties
+                        {
+                            property_name = addPropertyView.property_name,
+                            address = addPropertyView.address,
+                            city = addPropertyView.city,
+                            price = addPropertyView.price,
+                        };
 
+                        context.Properties.Add(newEvent);
+                        context.SaveChanges();
+                        return Redirect("/Rent");
+                    }
 
-                // Success!!! event added...  return custom message
-                TempData["Message"] = "Event " + newEvent.ID + " was successfully created.";
-                TestFunctions.PrintConsoleMessage("SUCCESS, EVENT ADDED / CREATED");
-
-                return Redirect("/Event");
-            }
-
-            addEventViewModel.SetCategories(context.Categories.ToList());
-            return View(addEventViewModel);
-        }
-
-    */
+                    addPropertyView.SetCategories(context.Properties.ToList());
+                    return View(addPropertyView);
+                }
+        */
 
     }
 }

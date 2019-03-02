@@ -5,17 +5,28 @@
 
     @using Microsoft.AspNetCore.Http
     @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-
-    string userType = @HttpContextAccessor.HttpContext.Session.GetString("Type") ?? "";
 }
 
+<!--Title of the page-->
 <h2 align="center">Here is the property details</h2>
 
-<div>
+<!--Shows the data for a individual property-->
+<div align="center" style="width:100%; height:100%">
+
     <h5>Status : <font color="green">Avaliable</font></h5>
     <h6>Property Name: <i>@Model.property_name</i></h6>
     <h6>City: <i>@Model.city</i></h6>
     <h6>Address: <i>@Model.address</i></h6>
     <h6>Price: $<i>@Model.price</i></h6>
-    <button type="button">Rent Property</button>
+    <h6>Bedrooms: <i>@Model.bedrooms</i></h6>
+    <h6>Bathrooms: <i>@Model.bathrooms</i></h6>
+
+
+    <!--
+    <h6>Number of bedrooms: <i>Model.bedrooms</i></h6>
+    <h6>Number of bathroooms: $<i>Model.bathrooms</i></h6>
+     -->
+
+
+    <a asp-controller="Rent" asp-action="addViewProperty" asp-route-Property_ID="@Model.Property_ID"><input type="button" value="Rent Property" /></a>
 </div>
