@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AGRental.Models
 {
+    //Creates the values for the User table
     public class User
     {
         [Key]

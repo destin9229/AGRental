@@ -1,57 +1,41 @@
 ﻿@model AGRental.ViewModels.UserPropertiesViewModel
-
 @{
     ViewData["Title"] = "Rent";
 }
+
+<!-- If user has a property display message and button -->
 @if (Model.hasProperty)
 {
+    <h1>Your account account has a property already!</h1>
+    <input type="button" value="Return to Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
 
-    <h1>Test</h1>
 }
 
 else
 {
-
     <h2 align="center">Rent</h2>
     <h6 align="center">Here are the available properties that we have to offer!!</h6>
-
     <table class="table table-striped">
         <tr>
             <th>Property Name: </th>
             <th>Address: </th>
             <th>City: </th>
             <th>Price: </th>
+            <th>Bedroom: </th>
+            <th>Bathroom: </th>
         </tr>
 
+        <!--Display's the Property List-->
         @foreach (var item in Model.propertyList)
         {
             <tr>
-                <td>
-                    <a asp-controller="Rent" asp-action="ViewProperty" asp-route-propertyId="@item.Property_ID">@item.property_name</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.city)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-
-                <!--
-                    <td>
-                            Html.DisplayFor(modelItem => item.bedrooms)
-                        </td>
-                        <td>
-                            Html.DisplayFor(modelItem => item.bathrooms)
-                        </td>
-                -->
-
-
+                <td>  <a asp-controller="Rent" asp-action="ViewProperty" asp-route-propertyId="@item.Property_ID">@item.property_name</a> </td>
+                <td>  @Html.DisplayFor(modelItem => item.address) </td>
+                <td>  @Html.DisplayFor(modelItem => item.city) </td>
+                <td> $@Html.DisplayFor(modelItem => item.price) </td>
+                <td>  @Html.DisplayFor(modelItem => item.bedrooms) </td>
+                <td>  @Html.DisplayFor(modelItem => item.bathrooms) </td>
             </tr>
         }
     </table>
-
-
 }

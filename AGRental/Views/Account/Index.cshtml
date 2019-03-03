@@ -4,7 +4,6 @@
     ViewData["Title"] = "Account";
 
     @using Microsoft.AspNetCore.Http
-    @using System.Globalization
     @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
     int User_ID = @HttpContextAccessor.HttpContext.Session.GetInt32("UserID") ?? 0;
@@ -21,9 +20,7 @@
     <a asp-controller="Account" asp-action="CurrentLease" asp-route-User_ID="@User_ID"><input type="button" value="Current Lease" /></a>
     <a asp-controller="Account" asp-action="EndLease" asp-route-User_ID="@User_ID"><input type="button" value="End Lease" /></a>
 
-    <!--
+    <!--  FUTURE implementation
         <input type="button" value="Renew Lease" onclick="("window.location.href='" + Url.Action("RenewLease", "Account") + "'");" />
-        <input type="button" value="End Lease" onclick="("window.location.href='" + Url.Action("EndLease", "Account") + "'");" />
     -->
-
 </div>

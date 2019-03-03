@@ -2,9 +2,6 @@
 
 @{
     ViewData["Title"] = "ViewProperty";
-
-    @using Microsoft.AspNetCore.Http
-    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 }
 
 <!--Title of the page-->
@@ -21,12 +18,6 @@
     <h6>Bedrooms: <i>@Model.bedrooms</i></h6>
     <h6>Bathrooms: <i>@Model.bathrooms</i></h6>
 
-
-    <!--
-    <h6>Number of bedrooms: <i>Model.bedrooms</i></h6>
-    <h6>Number of bathroooms: $<i>Model.bathrooms</i></h6>
-     -->
-
-
+    <!--Button adds property to account-->
     <a asp-controller="Rent" asp-action="addViewProperty" asp-route-Property_ID="@Model.Property_ID"><input type="button" value="Rent Property" /></a>
 </div>

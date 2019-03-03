@@ -20,135 +20,148 @@ namespace AGRental.Controllers
             context = dbContext;
         }
 
-        //INDEX     GET: /<controller>
+        //INDEX
         public IActionResult Index()
         {
             //Verfies if an "user" is logged in
-            //if (HttpContext.Session.GetString("Type") == "user")
-            //{
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
                 return View();
-           /* }
-
-            //Returns error message that a user is not logged in
+            }
             else
             {
-                ViewBag.ErrorMessage = "You must be logged into to gain access to this feature";
+                //Redirects to login page if no user is logged in
                 return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
-            }*/
+            }
         }
 
-
-        //Current Lease
+        //CURRENT LEASE
         public IActionResult CurrentLease(int User_ID)
         {
-            bool userHasProperty = true;
-            UserProperties current_user_properties = new UserProperties();
-            Properties current_property = new Properties();
-            Properties test_property = new Properties();
-            int current_property_id = 0;
-
-            if (ModelState.IsValid)
+             //Verfies if an "user" is logged in
+            if (HttpContext.Session.GetString("Type") == "user")
             {
-                try
-                {
-                    current_user_properties = context.UserProperties.Single(c => c.UserID == User_ID);
-                }
-                catch
-                {
-                    userHasProperty = false;
-                }
-                if (userHasProperty)
-                {
-                    test_property = context.Properties.Single(c => c.Property_ID == 8);
-                    test_property.price = 500;
-                    context.SaveChanges();
-                    current_property_id = current_user_properties.PropertyID;
-                    current_property = context.Properties.Single(c => c.Property_ID == current_property_id);
-                    return View(current_property);
+                    //Sets the userHasProperty equal to true
+                    bool userHasProperty = true;
+             
+                    //Creates an object for the current_user_properties from the UserProperties table
+                    UserProperties current_user_properties = new UserProperties();
 
-                }
-                else
-                {
-                    //ModelState.AddModelError("ServerError", "Your account does not have a property");
-                    return RedirectToAction("ErrorPage", "Account", new { username = HttpContext.Session.GetString("user") });
+                    //Creates an object for the current_property from the Properties table
+                    Properties current_property = new Properties();
 
-                }
+                    //Declares the current_property_id
+                    int current_property_id = 0;
 
+                    if (ModelState.IsValid)
+                    {
+                        try
+                        {
+                            //Checks to see if the current UserID is in the UserProperties table
+                            current_user_properties = context.UserProperties.Single(c => c.UserID == User_ID);
+                        }
+                        catch
+                        {
+                            //Sets the useerHasProperty to false
+                            userHasProperty = false;
+                        }
+                        if (userHasProperty)
+                        {
+                            //Sets tbe current_user_properties ID to current_property_id
+                            current_property_id = current_user_properties.PropertyID;
+
+                            //Looks for the Property_ID in the Properties table
+                            current_property = context.Properties.Single(c => c.Property_ID == current_property_id);
+
+                            //Saves the changes to the table
+                            context.SaveChanges();
+                        
+                            //Returns the current property to the View
+                            return View(current_property);
+                        }
+
+                        else
+                        {
+                            //Redirects to Error page
+                            return RedirectToAction("ErrorPage", "Account", new { username = HttpContext.Session.GetString("user") });
+                        }
+                    }
+                    return View();
             }
 
-            //Verfies if an "user" is logged in
-            //if (HttpContext.Session.GetString("Type") == "user")
-            //{
-
-            /*}
-
-            //Returns error message that a user is not logged in
             else
             {
-                ViewBag.ErrorMessage = "You must be logged into to gain access to this feature";
+                //Redirects to login page if no user is logged in
                 return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
-            }*/
-            return View();
+            }
         }
 
         public IActionResult ErrorPage()
         {
-            return View();
-        }
-
-        //RENEW LEASE
-        public IActionResult RenewLease()
-        {
             //Verfies if an "user" is logged in
-            //if (HttpContext.Session.GetString("Type") == "user")
-            //{
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
                 return View();
-            /*}
-
-            //Returns error message that a user is not logged in
+            }
+            //Redirects to login page if no user is logged in
             else
             {
                 return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
-            }*/
+            }
         }
-
 
         //END LEASE
         public IActionResult EndLease(int User_ID)
         {
             //Verfies if an "user" is logged in
-            //if (HttpContext.Session.GetString("Type") == "user")
-            //{
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
+                //Looks for the UserID in the UserProperties table
+                UserProperties grabProperty = context.UserProperties.Single(c => c.UserID == User_ID);
 
-            //Gets the UserID for the sessions
-            //int UserID = HttpContext.Session.GetInt32("UserID") ?? 0;
+                //Removes the item from the table
+                context.Remove(context.UserProperties.Single(c => c.UserID == User_ID));
 
-            UserProperties grabProperty = context.UserProperties.Single(c => c.UserID == User_ID);
+                //Saves the changes to the table
+                context.SaveChanges();
 
-            //Removes the item from the table
-            context.Remove(context.UserProperties.Single(c=>c.UserID == User_ID));
+                //Sets the PropertyID from the UserProperties and sets it to Current_PropertyID
+                int Current_PropertyID = grabProperty.PropertyID;
 
-            //Saves the new table
-            context.SaveChanges();
+                //Looks for the PropertyID that from the Properties table that matches the ID from the UserPropeties table
+                Properties updateProperty = context.Properties.Single(c => c.Property_ID == Current_PropertyID);
 
+                //Sets the is_taken column to false
+                updateProperty.is_taken = false;
 
-            int Current_PropertyID = grabProperty.PropertyID;
-
-            Properties updateProperty = context.Properties.Single(c => c.Property_ID == Current_PropertyID);
-
-            updateProperty.is_taken = false;
-
-            //Saves the new table
-            context.SaveChanges();
+                //Saves the changes to the table
+                context.SaveChanges();
 
                 return View();
-            /*}
+            }
 
-            //Returns error message that a user is not logged in
+            else
+            {            
+                //Redirects to login page if no user is logged in
+                return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
+            }
+        }
+
+        // NEEDS TO BE IMPLEMENTED
+        //RENEW LEASE
+        public IActionResult RenewLease()
+        {
+            //Verfies if an "user" is logged in
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
+                return View();
+            }
+            //Redirects to login page if no user is logged in
             else
             {
                 return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
-            }*/
+            }
         }
+    
     }
 }

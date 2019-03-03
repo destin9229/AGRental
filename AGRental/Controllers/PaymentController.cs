@@ -16,7 +16,17 @@ namespace AGRental.Controllers
         public IActionResult Index()
         {
             //NEEDS TO BE IMPLEMENTED
-            return View();
+
+            //Verfies if an "user" is logged in
+            if (HttpContext.Session.GetString("Type") == "user")
+            {
+                return View();
+            }
+            //Redirects user to login page
+            else
+            {
+                return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
+            }
         }
     }
 }

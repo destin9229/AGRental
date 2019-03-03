@@ -7,7 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AGRental.Models
 {
-    //[Table("Properties")]
+
+    //Creates the values for the Properties table
     public class Properties
     {
         [Key]

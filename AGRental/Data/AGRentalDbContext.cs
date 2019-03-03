@@ -14,23 +14,32 @@ namespace AGRental.Data
         public AGRentalDBContext(DbContextOptions<AGRentalDBContext> options)
                 : base(options)
         { }
-
-
+        //Links the User table amd sets it to Users
         public DbSet<User> Users { get; set; }
+
+        //Links the Properties table amd sets it to Properties
         public DbSet<Properties> Properties { get; set; }
+
+        //Links the UserProperties table amd sets it to UserProperties
         public DbSet<UserProperties> UserProperties { get; set; }
+
+        //Links the UserType table amd sets it to UserType
         public DbSet<UserType> UserType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+           //Sets UserID and PropertyID as a primary key
            modelBuilder.Entity<UserProperties>()
            .HasKey(c => new { c.UserID, c.PropertyID });
 
-            modelBuilder.Entity<UserType>().HasData(
+           //Sets the UserTypeID between admin and user
+           modelBuilder.Entity<UserType>().HasData(
                 new UserType { UserTypeID = 1, UserTypeName = "admin" },
                 new UserType { UserTypeID = 2, UserTypeName = "user" });
 
-             modelBuilder.Entity<User>().HasData(
+           //Sets the admin default values
+           modelBuilder.Entity<User>().HasData(
                  new User { User_ID = 1, Username = "admin", FirstName = "Destin", LastName = "Thomas", Email = "", Password = "Qwer1234", UserTypeID = 1 });
         }
 

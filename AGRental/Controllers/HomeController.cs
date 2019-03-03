@@ -21,8 +21,7 @@ namespace VenueApp.Controllers
             context = dbContext;
         }
 
-        //Index
-        //GET: /<controller>
+        //INDEX
         public IActionResult Index()
         {
             //Verfies if an "user" is logged in
@@ -31,9 +30,9 @@ namespace VenueApp.Controllers
                 return View();
             }
 
-            //Returns error message that a user is not logged in
             else
             {
+                //Redirects to login page if no user is logged in
                 return RedirectToAction("Login", "User", new { username = HttpContext.Session.GetString("user") });
             }
         }

@@ -20,9 +20,6 @@
     <h6>Bedrooms: <i>@Model.bedrooms</i></h6>
     <h6>Bathrooms: <i>@Model.bathrooms</i></h6>
 
-    <!--
-    <h6>Number of bedrooms: <i>Model.bedrooms</i></h6>
-    <h6>Number of bathroooms: $<i>Model.bathrooms</i></h6>
-     -->
-
+    <!--Button to Return to Account Page-->
+    <input type="button" value="Return to Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
 </div>

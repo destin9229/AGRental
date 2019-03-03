@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AGRental.ViewModels
 {
+    //Creates a LoginViewModel for the Login page
     public class LoginViewModel
     {
         [Required]

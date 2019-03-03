@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AGRental.Models
 {
+    //Creates the values for the UserType table
     public class UserType
     {
         [Key]
