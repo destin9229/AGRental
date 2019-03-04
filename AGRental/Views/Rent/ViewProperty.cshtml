@@ -18,6 +18,27 @@
     <h6>Bedrooms: <i>@Model.bedrooms</i></h6>
     <h6>Bathrooms: <i>@Model.bathrooms</i></h6>
 
+
     <!--Button adds property to account-->
+    <a asp-controller="Rent" asp-action="Index"><input type="button" value="Return to Properties" /></a>
     <a asp-controller="Rent" asp-action="addViewProperty" asp-route-Property_ID="@Model.Property_ID"><input type="button" value="Rent Property" /></a>
+
+    @if (@Model.bedrooms == 3)
+    {
+        <center>
+            <img src="https://images1.apartments.com/i2/HrWr0jiIp8b1W5P4x1tLsd3mJE5hyoYFw1DNC1qRiDw/117/monterra-hollywood-fl-3br2ba.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">
+        </center>
+    }
+    @if (@Model.bedrooms == 2)
+    {
+        <center>
+            <img src="https://spxeastwebfarm7-spherexxcom.netdna-ssl.com/common/dynamic.asp?p=/common/uploads/www_apartmentsincoopercityfl_com/floorplans/224-FLO-B.jpg&w=1&mw=550&h=1&mh=450" alt="Girl in a jacket" style="width:500px;height:600px;">
+        </center>
+    }
+    @if (@Model.bedrooms == 1)
+    {
+        <center>
+            <img src="https://spxeastwebfarm7-spherexxcom.netdna-ssl.com/common/dynamic.asp?p=/common/uploads/www_apartmentsincoopercityfl_com/floorplans/224-FLO-A.jpg&w=1&mw=550&h=1&mh=450" alt="Girl in a jacket" style="width:500px;height:600px;">
+        </center>
+    }
 </div>

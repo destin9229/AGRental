@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using AGRental.Data;
+using AGRental.Helpers;
+using AGRental.Models;
+using AGRental.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AGRental.Data;
-using AGRental.Models;
-using AGRental.Helpers;
-using AGRental.ViewModels;
-using Microsoft.AspNetCore.Session;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace AGRental.Controllers

@@ -8,11 +8,11 @@
 {
     <h1>Your account account has a property already!</h1>
     <input type="button" value="Return to Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
-
 }
 
 else
 {
+    <!--Display's if user doesn't have a property -->
     <h2 align="center">Rent</h2>
     <h6 align="center">Here are the available properties that we have to offer!!</h6>
     <table class="table table-striped">
