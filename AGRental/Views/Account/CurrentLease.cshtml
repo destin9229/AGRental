@@ -19,9 +19,6 @@
     <h6>Bedrooms: <i>@Model.bedrooms</i></h6>
     <h6>Bathrooms: <i>@Model.bathrooms</i></h6>
 
-    <!--Button to Return to Account Page-->
-    <input type="button" value="Return to Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
-
     @if (@Model.bedrooms == 3)
     {
         <center>
@@ -40,4 +37,7 @@
             <img src="https://spxeastwebfarm7-spherexxcom.netdna-ssl.com/common/dynamic.asp?p=/common/uploads/www_apartmentsincoopercityfl_com/floorplans/224-FLO-A.jpg&w=1&mw=550&h=1&mh=450" alt="Girl in a jacket" style="width:500px;height:600px;">
         </center>
     }
+
+    <!--Button to Return to Account Page-->
+    <input type="button" value="Return to Account" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
 </div>

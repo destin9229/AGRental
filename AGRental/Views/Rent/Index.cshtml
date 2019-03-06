@@ -6,15 +6,22 @@
 <!-- If user has a property display message and button -->
 @if (Model.hasProperty)
 {
-    <h1>Your account account has a property already!</h1>
-    <input type="button" value="Return to Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
+    <div align="center" style="width:100%; height:100%">
+        <h1 align="center"><font color="red">YOUR ACCOUNT ALREADY HAS A PROPERTY!</font></h1>
+
+        <center><img src="http://mis.worldcall.net.pk/images/access_denied.gif" alt="ACCESS DENIED"</center>
+        <br />
+        <input type="button" value="Return to Account" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
+       
+    </div>
+
 }
 
 else
 {
     <!--Display's if user doesn't have a property -->
     <h2 align="center">Rent</h2>
-    <h6 align="center">Here are the available properties that we have to offer!!</h6>
+    <h3 align="center">Here are the available properties that we have to offer!!</h3>
     <table class="table table-striped">
         <tr>
             <th>Property Name: </th>

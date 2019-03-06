@@ -11,15 +11,20 @@
 
 <h1 align="center">Account</h1>
 
-<h6 align="center">Here is your profile. Here is your current Lease. Would you like to renew the lease or end the lease?</h6>
+<h3 align="center">Here is your profile. Would you like to view your current lease or end your lease?</h3>
 
 <!-- BUTTONS ON ACCOUNT SCREEN  -->
 
 <div align="center" style="width:100%; height:100%">
 
-    <a asp-controller="Account" asp-action="CurrentLease" asp-route-User_ID="@User_ID"><input type="button" value="Current Lease" /></a>
-    <a asp-controller="Account" asp-action="EndLease" asp-route-User_ID="@User_ID"><input type="button" value="End Lease" /></a>
+    <a asp-controller="Account" asp-action="CurrentLease" asp-route-User_ID="@User_ID"><input type="button" value="Current Lease" class="btn btn-secondary btn-lg" /></a>
+    <a asp-controller="Account" asp-action="EndLease" asp-route-User_ID="@User_ID"><input type="button" value="End Lease" class="btn btn-secondary btn-lg" /></a>
+    <br />
+    <br />
 
+    <center>
+        <img src="http://theberckmanhouse.com/wp-content/uploads/example-of-rental-application-13-rental-application-templates-free-sample-example-format.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">
+    </center>
     <!--  FUTURE implementation
         <input type="button" value="Renew Lease" onclick="("window.location.href='" + Url.Action("RenewLease", "Account") + "'");" />
     -->

@@ -2,20 +2,24 @@
     ViewData["Title"] = "EndLease";
 }
 <!--Message that user is no longer the owner-->
-<h3 align="center">End Lease</h3>
-<h1 align="center"><font color="red">You are no longer the owner for that property</font></h1>
+<h1 align="center"><font color="red">LEASE ENDED</font></h1>
+<h1 align="center"><font color="red">You are no longer the owner for that property!</font></h1>
 
 <!--Button that allow user to go to rent page-->
 <div align="center" style="width:100%; height:100%">
     <!--
-         <h5>Status : <font color="red">Owned</font></h5>
-        <h6>Property Name: <i>Model.property_name</i></h6>
-        <h6>City: <i>Model.city</i></h6>
-        <h6>Address: <i>Model.address</i></h6>
-        <h6>Price: $<i>Model.price</i></h6>
-        <h6>Bedrooms: <i>Model.bedrooms</i></h6>
-        <h6>Bathrooms: <i>Model.bathrooms</i></h6>
-        
- -->
-    <input type="button" value="Search for a New Property" onclick="@("window.location.href='" + @Url.Action("Index", "Rent") + "'");" />
+            <h5>Status : <font color="red">Owned</font></h5>
+           <h6>Property Name: <i>Model.property_name</i></h6>
+           <h6>City: <i>Model.city</i></h6>
+           <h6>Address: <i>Model.address</i></h6>
+           <h6>Price: $<i>Model.price</i></h6>
+           <h6>Bedrooms: <i>Model.bedrooms</i></h6>
+           <h6>Bathrooms: <i>Model.bathrooms</i></h6>
+
+    -->
+    <center><img src="https://media3.giphy.com/media/l4Hoan4OykIV2vzH2/200.gif?cid=3640f6095c6deb887a774d776bdf00a8" alt="ACCESS DENIED"</center>
+
+    <br />
+    <br/>
+    <input type="button" value="Search for a New Property" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Rent") + "'");" />
 </div>
