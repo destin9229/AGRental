@@ -18,6 +18,7 @@ namespace AGRental.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<< HEAD
             modelBuilder.Entity("AGRental.Models.Properties", b =>
                 {
                     b.Property<int>("Property_ID")
@@ -43,28 +44,41 @@ namespace AGRental.Migrations
                     b.ToTable("Properties");
                 });
 
+=======
+>>>>>>> Project Working with Images
             modelBuilder.Entity("AGRental.Models.User", b =>
                 {
                     b.Property<int>("User_ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<< HEAD
                     b.Property<string>("Email");
+=======
+                    b.Property<string>("Username");
+>>>>>>> Project Working with Images
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
+<<<<<<< HEAD
                     b.Property<string>("Password");
 
                     b.Property<int>("UserTypeID");
 
                     b.Property<string>("Username");
+=======
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Password");
+>>>>>>> Project Working with Images
 
                     b.HasKey("User_ID");
 
                     b.ToTable("Users");
 
+<<<<<<< HEAD
                     b.HasData(
                         new { User_ID = 1, Email = "", FirstName = "Destin", LastName = "Thomas", Password = "Qwer1234", UserTypeID = 1, Username = "admin" }
                     );
@@ -98,6 +112,37 @@ namespace AGRental.Migrations
                         new { UserTypeID = 2, UserTypeName = "user" }
                     );
                 });
+=======
+                });
+           
+
+            modelBuilder.Entity("AGRental.Models.Properties", b =>
+                {
+                    b.Property<int>("Property_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("property_name");
+
+                    b.Property<string>("address");
+
+                    b.HasKey("Property_ID");
+
+                    b.ToTable("Properties");
+
+                });
+
+            modelBuilder.Entity("AGRental.Models.User_Properties", b =>
+            {
+                b.Property<int>("UserID");
+
+                b.Property<int>("PropertyID");
+
+                b.ToTable("User_Properties");
+
+            });
+
+>>>>>>> Project Working with Images
 #pragma warning restore 612, 618
         }
     }

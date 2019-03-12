@@ -39,7 +39,11 @@ namespace AGRental.Controllers
             }
 
             //Verfies if an "user" is logged in
+<<<<<<< HEAD
             else if(HttpContext.Session.GetString("Type") == "user")
+=======
+            else if (HttpContext.Session.GetString("Type") == "user")
+>>>>>>> Project Working with Images
             {
                 //Checks the Users table to see if the current user
                 users = context.Users.Where(c => c.User_ID == HttpContext.Session.GetInt32("UserID")).ToList();
@@ -56,7 +60,11 @@ namespace AGRental.Controllers
 
         //LOGIN
         public IActionResult Login()
+<<<<<<< HEAD
         { 
+=======
+        {
+>>>>>>> Project Working with Images
             // If the user is already logged in
             if (HttpContext.Session.TryGetValue("user", out byte[] value))
             {
@@ -129,7 +137,11 @@ namespace AGRental.Controllers
             //Clears the Current Session
             HttpContext.Session.Clear();
             TempData["logoutMessage"] = "You have successfully logged out";
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> Project Working with Images
             // Logs User out and redirects to its AGRental Index
             return RedirectToAction("Index", "AGRental", new { username = HttpContext.Session.GetString("user") });
         }

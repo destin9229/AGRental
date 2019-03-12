@@ -13,7 +13,14 @@
     <p class="text-success" align="center">You have Succsessfully Logged In @ViewBag.Username <span class="glyphicon glyphicon-ok " aria-hidden="true"></span></p>
 }
 
+<<<<<<< HEAD
     <div align="center" style="width:100%; height:100%">
         <input type="button" value="View Account"  onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
         <button><a  asp-action="Logout">Logout</a></button>
     </div>
+=======
+<div align="center" style="width:100%; height:100%">
+    <input type="button" value="View Account" onclick="@("window.location.href='" + @Url.Action("Index", "Account") + "'");" />
+    <button><a asp-action="Logout">Logout</a></button>
+</div>
+>>>>>>> Project Working with Images

@@ -29,6 +29,7 @@ namespace AGRental.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+<<<<<<< HEAD
            //Sets UserID and PropertyID as a primary key
            modelBuilder.Entity<UserProperties>()
            .HasKey(c => new { c.UserID, c.PropertyID });
@@ -41,6 +42,20 @@ namespace AGRental.Data
            //Sets the admin default values
            modelBuilder.Entity<User>().HasData(
                  new User { User_ID = 1, Username = "admin", FirstName = "Destin", LastName = "Thomas", Email = "", Password = "Qwer1234", UserTypeID = 1 });
+=======
+            //Sets UserID and PropertyID as a primary key
+            modelBuilder.Entity<UserProperties>()
+            .HasKey(c => new { c.UserID, c.PropertyID });
+
+            //Sets the UserTypeID between admin and user
+            modelBuilder.Entity<UserType>().HasData(
+                 new UserType { UserTypeID = 1, UserTypeName = "admin" },
+                 new UserType { UserTypeID = 2, UserTypeName = "user" });
+
+            //Sets the admin default values
+            modelBuilder.Entity<User>().HasData(
+                  new User { User_ID = 1, Username = "admin", FirstName = "Destin", LastName = "Thomas", Email = "", Password = "Qwer1234", UserTypeID = 1 });
+>>>>>>> Project Working with Images
         }
 
     }
